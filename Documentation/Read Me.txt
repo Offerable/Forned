@@ -1,0 +1,40 @@
+Installation:
+--------------------
+
+1- Create Facebook Application from https://developers.facebook.com/quickstarts/?platform=web
+2- Open config.php and update app id and secret to yours.
+3- upload the source folder and run it from the browser.
+
+That's all.
+
+for support email us at support@brightery.com.eg or visit our website http://www.brightery.com.eg
+
+
+
+Change Log
+---------------------
+
+Version 3:
+     - Setting central regional of the search.
+     - Custom limit.
+     - Multi app support.
+     - Exporting bug fix.
+     - Better UI experience.
+     - Customizable and flexible view.
+     - Opening links in a new tab.
+     - Pagination.
+     - Total results counter.
+     - Customizable exporting.
+     - Custom Fields to show.
+     - Location Criteria Support.
+     - Map Support.
+
+Version 2:
+    - Query optimization
+    - Better performance
+    - Supporting user, group and place
+    - Supporting cover photos
+    - FB js SDK integration + angularJS support
+
+Version 1 :
+    - Initial version

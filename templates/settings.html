@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-md-12">C,O,D,E,L,I,S,T,.,C,C
+        <h4 style="color:gray;">Custom Fields</h4>
+        <ul class="custom_fields">
+            <li data-ng-repeat="field in typeFields()" class="col-md-3">
+                <input type="checkbox" ng-model="field.checked"/> {{field.name}}
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+        <div class="clearfix"></div>
+        <h4 style="color:gray;">Custom Location</h4>
+        <div class="col-sm-12">
+            <div id="map" style="width: 100%; height: 300px;"></div>
+            <div id="floating-panel">
+                <input id="address" class="form-control" type="textbox" value="">
+                <button id="submit" type="submit" value="Search" class="btn form-control-feedback GetUserMap"><i
+                        class="fa fa-map-pin"></i></button>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <h4 style="color:gray;">Distance</h4>
+
+        <div class="col-sm-3">
+            <input id="distance" type="text" class="form-control" data-ng-model="form.distance"
+                   ng-init="form.distance = 500000">
+        </div>
+        <script>
+            function initMap() {
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    center: new google.maps.LatLng(20.68177501, -103.3514794),
+                    zoom: 8,
+                });
+                $('#address').keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        geocodeAddress(geocoder, map);
+                        event.preventDefault();
+                        return false;
+                    }
+                });
+                var geocoder = new google.maps.Geocoder();
+                document.getElementById('submit').addEventListener('click', function () {
+                    geocodeAddress(geocoder, map);
+                });
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(20.68177501, -103.3514794),
+                    map: map
+                });
+                google.maps.event.addListener(map, 'click', function (event) {
+                    placeMarker(event.latLng);
+                });
+                function geocodeAddress(geocoder, resultsMap) {
+                    var address = document.getElementById('address').value;
+                    geocoder.geocode({'address': address}, function (results, status) {
+                        if (status === google.maps.GeocoderStatus.OK) {
+                            placeMarker(results[0].geometry.location);
+                            resultsMap.setCenter(results[0].geometry.location);
+                        }
+                    });
+                }
+                function placeMarker(location) {
+                    marker.setPosition(location);
+                    map.setCenter(location);
+                    window.latlng = (location.lat() + ',' + location.lng());
+                }
+            }
+        </script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBRnHfIT25fNM1Z06GAgiKFPXXE-L5GzY&callback=initMap&language=en&region=eg">
+        </script>
+    </div>
+</div>
